@@ -9,7 +9,7 @@ public class Developer {
     private static double totalSalary;
     private boolean canCode = true;
     private String name;
-    private int age;
+    protected int age;
     private double salary;
     private ArrayList<String> languages;
 
@@ -25,6 +25,13 @@ public class Developer {
     	this.languages = new ArrayList<String>();
     	Developer.devCount++;
     	this.name = name;
+    }
+    
+    public Developer(String name, int age) {
+    	this.languages = new ArrayList<String>();
+    	Developer.devCount++;
+    	this.name = name;
+    	this.age = age;
     }
 
     public Developer(String name, int age,double salary){

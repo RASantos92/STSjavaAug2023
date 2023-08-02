@@ -12,6 +12,7 @@ public class FrontEndDev extends Developer {
 	public FrontEndDev(String name) {
 		super(name);
 		this.setAge(21);
+		this.age = 21;
 		this.setSalary(120000);
 		this.isArtistic = true;
 	}
