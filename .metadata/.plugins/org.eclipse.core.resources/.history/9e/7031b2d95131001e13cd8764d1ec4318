@@ -1,0 +1,13 @@
+package com.robert.inheritancedemo;
+
+public class FrontEndDev extends Developer {
+
+	public FrontEndDev() {
+		super("no name front end dev");
+	}
+	
+	public FrontEndDev(String name) {
+		this.name = name;
+	}
+
+}

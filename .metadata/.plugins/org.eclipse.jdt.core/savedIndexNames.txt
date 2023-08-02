@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\rasbm\OneDrive\Desktop\javaStsAug2023\.metadata\.plugins\org.eclipse.jdt.core
+4122157038.index
+1865797976.index
+2692662930.index
