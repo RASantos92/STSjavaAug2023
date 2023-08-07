@@ -12,5 +12,6 @@
 	<h3> Movie: <c:out value="${movie}"/></h3>
 	<h3> Comment: <c:out value="${comment}"/></h3>
 	<h3> Rating: <c:out value="${rating}"/></h3>
+	<h3> Reviewer: <c:out value="${reviewer}"/></h3>
 </body>
 </html>
