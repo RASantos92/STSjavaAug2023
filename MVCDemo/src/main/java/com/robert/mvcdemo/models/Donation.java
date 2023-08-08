@@ -56,7 +56,19 @@ public class Donation {
 	
 	
 	
-    public Long getId() {
+	
+	
+    public Donation(
+			@NotNull @Size(min = 2, max = 200, message = "donation name needs to be greater than 2 characters and less than 200") String donationName,
+			@NotNull @Size(min = 2, max = 54) String donor, @NotNull @Min(1) Integer quantity,Long id) {
+		super();
+		this.id = id;
+		this.donationName = donationName;
+		this.donor = donor;
+		this.quantity = quantity;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
