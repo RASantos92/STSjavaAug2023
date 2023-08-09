@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.robert.mvcdemo2.models.Donation;
 import com.robert.mvcdemo2.services.DonationService;
@@ -24,12 +25,28 @@ public class HomeController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard(Model model) {
-		model.addAttribute("allDonations", this.donationServ.getAll());
+	public String dashboard(Model model,@RequestParam(value="search", required=false) String search) {
+		if(search == null) {
+			model.addAttribute("allDonations", this.donationServ.getAll());
+		}else {
+			model.addAttribute("allDonations", this.donationServ.searchDonationByDonationName(search));
+		}
+		
+		model.addAttribute("donation", new Donation());
 		return "donations/showAll.jsp";
 	}
 	
-	@GetMapping("/show/one/donation/{id}")
+	@PostMapping("/donations")
+	public String processNewDonation(@Valid @ModelAttribute("donation") Donation newDonation, BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("allDonations", this.donationServ.getAll());
+			return "donations/showAll.jsp";
+		}
+		donationServ.create(newDonation);
+		return "redirect:/dashboard";
+	}
+	
+	@GetMapping("/donations/{id}")
 	public String showOneDonation(Model model, @PathVariable("id") Long id) {
 		model.addAttribute("oneDonation", this.donationServ.getOne(id));
 		return "donations/showOne.jsp";
@@ -40,14 +57,6 @@ public class HomeController {
 		return "donations/create.jsp";
 	}
 	
-	@PostMapping("/donations")
-	public String processNewDonation(@Valid @ModelAttribute("donation") Donation newDonation, BindingResult result) {
-		if(result.hasErrors()) {
-			return "donations/create.jsp";
-		}
-		donationServ.create(newDonation);
-		return "redirect:/dashboard";
-	}
 
 	@GetMapping("/donations/edit/m/{id}")
 	public String editDonation(Model model, @PathVariable("id") Long id) {
@@ -56,14 +65,13 @@ public class HomeController {
 		return "donations/edit.jsp";
 	}
 	
-	@PatchMapping("/donations/process/edit/m/{id}")
+	@PatchMapping("/donations/{id}")
 	public String processEditDonation(@Valid @ModelAttribute("donation") Donation donation, BindingResult result) {
 		if(result.hasErrors()) {
 			return "donations/edit.jsp";
 		}
 		donationServ.editOne(donation);
 		return "redirect:/dashboard";
-		
 	}
 	
 	@DeleteMapping("/donations/{id}")
