@@ -3,8 +3,11 @@ package com.robert.mvcdemorelationships.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,10 +40,40 @@ public class DonationController {
 			model.addAttribute("allUsers", userServ.findAll());
 			return "donation/create.jsp";
 		}
-		System.out.println("teest" + donation.getDonor());
 		donationServ.create(donation);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/edit/m/{id}")
+	public String editDonation(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("donation", donationServ.getOne(id));
+		return "donation/edit.jsp";
+	}
+	
+	@PatchMapping("/{id}")
+	public String processEditDonation(@Valid @ModelAttribute("donation") Donation donation, BindingResult result) {
+		if(result.hasErrors()) {
+			return "donation/edit.jsp";
+		}
+		donationServ.editOne(donation);
+		return "redirect:/";
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	public String deleteDonation(@PathVariable("id") Long id) {
+		donationServ.delete(id);
+		return "redirect:/";
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

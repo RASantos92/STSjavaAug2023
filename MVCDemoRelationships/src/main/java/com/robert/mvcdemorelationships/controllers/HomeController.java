@@ -1,6 +1,7 @@
 package com.robert.mvcdemorelationships.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.robert.mvcdemorelationships.services.DonationService;
@@ -16,7 +17,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("allDonations", donationServ.getAll());
+		model.addAttribute("allUsers", userServ.findAll());
 		return "home/dashboard.jsp";
 	}
 

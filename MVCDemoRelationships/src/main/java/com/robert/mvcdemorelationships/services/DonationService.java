@@ -22,8 +22,6 @@ public class DonationService {
 	}
 	
 	public Donation create(Donation donation) {
-		
-		
 		return donationRepo.save(donation);
 	}
 	

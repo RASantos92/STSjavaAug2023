@@ -56,11 +56,9 @@ INDEX VERSION 1.131+C:\Users\rasbm\OneDrive\Desktop\javaStsAug2023\.metadata\.pl
 216365216.index
 3679296366.index
 3209566812.index
-507454385.index
 2848703337.index
 3057007988.index
 1215520725.index
-3255325340.index
 3821783733.index
 1903612385.index
 1005177108.index
