@@ -1,9 +1,0 @@
-package com.robert.inheritancedemo;
-
-public class FrontEndDev extends Developer {
-
-	public FrontEndDev() {
-		
-	}
-
-}

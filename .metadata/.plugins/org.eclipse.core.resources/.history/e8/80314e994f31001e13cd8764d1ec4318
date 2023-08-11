@@ -1,9 +1,0 @@
-package com.robert.inheritancedemo;
-
-public class Developer {
-
-	public Developer() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
